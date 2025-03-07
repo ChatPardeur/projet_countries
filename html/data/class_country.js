@@ -38,11 +38,6 @@ class Country
 
     }
 
-    getLanguages() {
-        Language.fill_languages();
-        return Language.all_languages;
-    }
-
     static fill_countries()
     {
         countries.forEach(country => {
@@ -68,6 +63,3 @@ class Country
         })
     }
 }
-
-Country.fill_countries();
-console.table(Country.all_countries["AFG"].toString());
