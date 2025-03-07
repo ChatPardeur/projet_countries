@@ -18,20 +18,20 @@ class Country
 
     toString() {
 
-        $chaine = "";
+        let chaine = "";
 
         if (this.borders.length == 0) {
-            $chaine = `${this.alpha3code}, ${this.names["fr"]}, ${this.capital}, ${this.continent}, ${this.population} hab`;
+            chaine = `${this.alpha3code}, ${this.names["fr"]}, ${this.capital}, ${this.continent}, ${this.population} hab`;
         } else if (this.borders.length == 1) {
-            $chaine = `${this.alpha3code}, ${this.names["fr"]}, ${this.capital}, ${this.continent}, ${this.population} hab, ${this.borders[0]}`;
+            chaine = `${this.alpha3code}, ${this.names["fr"]}, ${this.capital}, ${this.continent}, ${this.population} hab, ${Country.all_countries[this.borders[0]].names["fr"]}`;
         } else {
-            $listBorders = "(" + $listBorders[0];
+            let listBorders = "(" + this.borders[0];
             for (let i = 1; i < this.borders.length; i++) {
-                $listBorders += ", " + this.borders[i];
+                listBorders += ", " + Country.all_countries[this.borders[i]].names["fr"];
             }
-            $listBorders += ")";
+            listBorders += ")";
 
-            $chaine = `${this.alpha3code}, ${this.names["fr"]}, ${this.capital}, ${this.continent}, ${this.population} hab, ${this.borders}`;
+            chaine = `${this.alpha3code}, ${this.names["fr"]}, ${this.capital}, ${this.continent}, ${this.population} hab, ${listBorders}`;
         }
         
         return chaine;
