@@ -2,7 +2,7 @@ class Country
 {
     static all_countries = {}
 
-    constructor(alpha3Code, names, capital, continent, population, superficie, borders, gentile, domain, flag)
+    constructor(alpha3Code, names, capital, continent, population, superficie, borders, gentile, domain, flag, languages, currencies)
     {
         this.alpha3code = alpha3Code
         this.names = names
@@ -14,6 +14,8 @@ class Country
         this.gentile = gentile
         this.domain = domain
         this.flag = flag
+        this.languages = languages
+        this.currencies = currencies
     }
 
     toString() {
@@ -43,6 +45,7 @@ class Country
         return this.population / this.superficie
     }
 
+
     static fill_countries()
     {
         countries.forEach(country => {
@@ -55,6 +58,19 @@ class Country
 
             let borders = country.borders == undefined ? [] : country.borders
 
+            let languages = []
+
+            country.languages.forEach(language => {
+                languages.push(language.iso639_2)
+            });
+
+            let currencies = []
+
+            if(country.currencies != undefined)
+            country.currencies.forEach(currency => {
+                currencies.push(currency.code)
+            })
+
             this.all_countries[country.alpha3Code] = new Country(country.alpha3Code, 
                 names, 
                 country.capital, 
@@ -64,9 +80,13 @@ class Country
                 borders, 
                 country.demonym, 
                 country.topLevelDomain, 
-                country.flags.svg)
+                country.flags.svg,
+                languages, 
+                currencies)
+            console.log(this.all_countries)
         })
     }
+
 
 
 }
