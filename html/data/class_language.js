@@ -21,12 +21,9 @@ class Language {
             country.languages.forEach(language => {
                 if(this.all_languages[language.iso639_2] == undefined)
                 {
-                    this.all_languages[language.iso639_2] = language.name
+                    this.all_languages[language.iso639_2] = new Language(language.iso639_2, language.name)
                 }
             });
         })
     }
 }
-
-Language.fillLanguages()
-console.table(Language.all_languages)
