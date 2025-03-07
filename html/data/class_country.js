@@ -23,11 +23,11 @@ class Country
         if (this.borders.length == 0) {
             chaine = `${this.alpha3code}, ${this.names["fr"]}, ${this.capital}, ${this.continent}, ${this.population} hab`;
         } else if (this.borders.length == 1) {
-            chaine = `${this.alpha3code}, ${this.names["fr"]}, ${this.capital}, ${this.continent}, ${this.population} hab, ${this.borders[0]}`;
+            chaine = `${this.alpha3code}, ${this.names["fr"]}, ${this.capital}, ${this.continent}, ${this.population} hab, ${Country.all_countries[this.borders[0]].names["fr"]}`;
         } else {
             let listBorders = "(" + this.borders[0];
             for (let i = 1; i < this.borders.length; i++) {
-                listBorders += ", " + this.borders[i];
+                listBorders += ", " + Country.all_countries[this.borders[i]].names["fr"];
             }
             listBorders += ")";
 
@@ -36,6 +36,11 @@ class Country
         
         return chaine;
 
+    }
+
+    getLanguages() {
+        Language.fill_languages();
+        return Language.all_languages;
     }
 
     static fill_countries()
@@ -65,4 +70,4 @@ class Country
 }
 
 Country.fill_countries();
-console.log(Country.all_countries["ALA"].toString());
+console.table(Country.all_countries["AFG"].toString());
