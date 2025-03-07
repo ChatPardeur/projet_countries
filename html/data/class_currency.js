@@ -1,14 +1,14 @@
 class Currency {
 
-    static tabCurrencies = 
-
-    constructor(c, n, s) {
+    constructor(c, n, s) 
+    {
         this.code = c;
         this.nom = n;
         this.symbole = s;
     }
 
-    static fill_currencies() {
+    static fill_currencies() 
+    {
         
     }
     
@@ -17,3 +17,4 @@ class Currency {
     }
 
 }
+

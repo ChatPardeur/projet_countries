@@ -1,5 +1,7 @@
-import * as countries from "countries.js"
 class Language {
+
+    static all_languages = {}
+
     constructor (code, name)
     {
         this.codesIso639_2 = code
@@ -8,15 +10,23 @@ class Language {
 
     toString()
     {
-        return `${name}(${code})`
+        return `${this.name}(${this.codesIso639_2})`
     }
+
+    
 
     static fillLanguages()
     {
-
+        countries.forEach((country)=>{
+            country.languages.forEach(language => {
+                if(this.all_languages[language.iso639_2] == undefined)
+                {
+                    this.all_languages[language.iso639_2] = language.name
+                }
+            });
+        })
     }
 }
 
-test = Language("pus", "Pastho")
-
-console.log(test)
+Language.fillLanguages()
+console.table(Language.all_languages)
