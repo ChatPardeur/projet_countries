@@ -15,7 +15,7 @@ class Language {
 
     
 
-    static fillLanguages()
+    static fill_languages()
     {
         countries.forEach((country)=>{
             country.languages.forEach(language => {
