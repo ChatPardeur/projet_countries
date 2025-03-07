@@ -38,6 +38,11 @@ class Country
 
     }
 
+    getPopDensity()
+    {
+        return this.population / this.superficie
+    }
+
     static fill_countries()
     {
         countries.forEach(country => {
@@ -62,4 +67,6 @@ class Country
                 country.flags.svg)
         })
     }
+
+
 }
