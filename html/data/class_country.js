@@ -51,11 +51,13 @@ class Country
 
         if(Object.keys(Country.all_countries).length === 0)
         {
-            console.log("cc")
+            Country.fill_countries()
         }
-        this.borders.forEach(border => {
-            //  ret.push()
+        this.borders.forEach(borderCode => {
+            ret.push(Country.all_countries[borderCode])
         })
+
+        return ret
     }
 
 
