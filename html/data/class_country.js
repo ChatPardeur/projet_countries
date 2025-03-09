@@ -45,9 +45,23 @@ class Country
         return this.population / this.superficie
     }
 
+    getBorders()
+    {
+        let ret = []
+
+        if(Object.keys(Country.all_countries).length === 0)
+        {
+            console.log("cc")
+        }
+        this.borders.forEach(border => {
+            //  ret.push()
+        })
+    }
+
 
     static fill_countries()
     {
+
         countries.forEach(country => {
             let names = []
             names["fr"] = country.translations["fr"]
@@ -83,10 +97,6 @@ class Country
                 country.flags.svg,
                 languages, 
                 currencies)
-            console.log(this.all_countries)
         })
     }
-
-
-
 }
