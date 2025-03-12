@@ -40,6 +40,32 @@ class Country
 
     }
 
+    getCurrencies() {
+        let tab = {};
+        if(Object.keys(Currency.all_currencies).length === 0)
+        {
+            Currency.fill_currencies(countries);
+        }
+
+        for (let i = 0; i < this.currencies.length; i++) {
+            tab[this.currencies[i]] = Currency.all_currencies[this.currencies[i]];
+        }
+        return tab;
+    }
+
+    getLanguages() {
+        let tab = {};
+        if(Object.keys(Language.all_languages).length === 0)
+        {
+            Language.fill_languages();
+        }
+
+        for (let i = 0; i < this.languages.length; i++) {
+            tab[this.languages[i]] = Language.all_languages[this.languages[i]];
+        }
+        return tab;
+    }
+
     getPopDensity()
     {
         return this.population / this.superficie
@@ -59,7 +85,6 @@ class Country
 
         return ret
     }
-
 
     static fill_countries()
     {
