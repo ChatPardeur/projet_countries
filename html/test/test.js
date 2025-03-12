@@ -17,10 +17,9 @@ function outsideTheContinent()
     console.table(tab);
     return tab;
 }
-outsideTheContinent();
-
 
 function compareAmountOfNeighbors(c1, c2)
+// compare 2 pays par rapport à la quantité de voisins qu'ils possèdent
 {
     if(c1.borders.length < c2.borders.length)
     {
@@ -40,20 +39,41 @@ function moreNeighbors()
 // Tableau des pays ayant le plus grand nombre de voisins. Affichez aussi les voisins
 {
     let sortedCountriesByNeighbors = []
-    Object.values(Country.all_countries).sort(compareAmountOfNeighbors).forEach(country => {
-        sortedCountriesByNeighbors.push([country.names["fr"], country.getBorders()])
+    Object.values(Country.all_countries).sort(compareAmountOfNeighbors).forEach(country => {        // trie les pays par rapport aux voisins, puis insère les données voulues dans sortedCountriesByNeighbors
+        sortedCountriesByNeighbors.push(country)
     })
 
-    console.log("5 pays avec le plus de voisins")
+    sortedCountriesByNeighbors = sortedCountriesByNeighbors.reverse()       // inverse la tableau pour avoir les pays avec le plus de voisins au début
+
+    let maxNeighbors = sortedCountriesByNeighbors[0].borders.length         // nombre max de voisins
+
+    let maxCountries = []                                                   // pays ayant le max de voisins
     
-    console.log(sortedCountriesByNeighbors.slice(-5).reverse())
+    let i = 0
+    while(i < sortedCountriesByNeighbors.length && sortedCountriesByNeighbors[i].borders.length == maxNeighbors)
+    {
+        maxCountries.push([sortedCountriesByNeighbors[i].alpha3code, sortedCountriesByNeighbors[i].borders])
+        i++
+    }
+
+    console.log("maximum de voisins : " + maxNeighbors)
+    console.log("pays : ")
+    console.table(maxCountries)
 }
 
 function neighborless()
 // Tableau des pays n’ayant aucun voisin
 {
     let neighborlessCountries = []
-    Object.values(Country.all_countries).forEach(country)
+    Object.values(Country.all_countries).forEach(country => {
+        if(country.borders.length == 0)         // si le pays n'a aucun voisin, on l'ajoute à neighborlessCountries
+        {
+            neighborlessCountries.push(country)
+        }
+    })
+
+    console.log("les pays n'ayant aucun voisins")
+    console.table(neighborlessCountries)
 }
 
 function moreLanguages()
