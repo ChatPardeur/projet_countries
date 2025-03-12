@@ -81,7 +81,7 @@ function moreLanguages()
 {
     let tab = [];
     let ordre = Object.values(Country.all_countries).sort((a, b) => b.languages.length - a.languages.length);
-    tab.push(ordre[0].alpha3code);
+    tab.push([ordre[0].alpha3code, ordre[0].getLanguages()]);
     let i = 1;
     while (ordre[i].languages.length == ordre[0].languages.length) {
         tab.push([ordre[i].alpha3code, ordre[i].getLanguages()]);
@@ -89,7 +89,6 @@ function moreLanguages()
     }
     console.log(tab);
 }
-moreLanguages()
 
 function withCommonLanguage()
 // Tableau des pays ayant au moins un voisin parlant l’une de ses langues. 
