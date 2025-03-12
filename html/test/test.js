@@ -1,5 +1,5 @@
-
 Country.fill_countries()
+
 
 
 function outsideTheContinent() 
@@ -8,16 +8,41 @@ function outsideTheContinent()
 
 }
 
+
+function compareAmountOfNeighbors(c1, c2)
+{
+    if(c1.borders.length < c2.borders.length)
+    {
+        return -1
+    }
+    else if (c1.borders.length > c2.borders.length)
+    {
+        return 1
+    }
+    else
+    {
+        return 0
+    }
+}
+
 function moreNeighbors()
 // Tableau des pays ayant le plus grand nombre de voisins. Affichez aussi les voisins
 {
+    let sortedCountriesByNeighbors = []
+    Object.values(Country.all_countries).sort(compareAmountOfNeighbors).forEach(country => {
+        sortedCountriesByNeighbors.push([country.names["fr"], country.getBorders()])
+    })
 
+    console.log("5 pays avec le plus de voisins")
+    
+    console.log(sortedCountriesByNeighbors.slice(-5).reverse())
 }
 
 function neighborless()
 // Tableau des pays n’ayant aucun voisin
 {
-
+    let neighborlessCountries = []
+    Object.values(Country.all_countries).forEach(country)
 }
 
 function moreLanguages()
