@@ -25,5 +25,3 @@ class Currency {
 
 }
 
-Currency.fill_currencies(countries);
-console.table(Currency.all_currencies);
