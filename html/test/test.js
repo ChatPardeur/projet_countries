@@ -79,7 +79,15 @@ function neighborless()
 function moreLanguages()
 // Tableau des pays parlant le plus de langues. Affichez aussi les langues
 {
-
+    let tab = [];
+    let ordre = Object.values(Country.all_countries).sort((a, b) => b.languages.length - a.languages.length);
+    tab.push(ordre[0].alpha3code);
+    let i = 1;
+    while (ordre[i].languages.length == ordre[0].languages.length) {
+        tab.push(ordre[i].alpha3code);
+        i += 1;
+    }
+    console.table(tab);
 }
 
 function withCommonLanguage()
