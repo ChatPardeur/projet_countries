@@ -84,11 +84,12 @@ function moreLanguages()
     tab.push(ordre[0].alpha3code);
     let i = 1;
     while (ordre[i].languages.length == ordre[0].languages.length) {
-        tab.push(ordre[i].alpha3code);
+        tab.push([ordre[i].alpha3code, ordre[i].getLanguages()]);
         i += 1;
     }
-    console.table(tab);
+    console.log(tab);
 }
+moreLanguages()
 
 function withCommonLanguage()
 // Tableau des pays ayant au moins un voisin parlant l’une de ses langues. 

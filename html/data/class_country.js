@@ -41,27 +41,27 @@ class Country
     }
 
     getCurrencies() {
-        let tab = {};
+        let tab = [];
         if(Object.keys(Currency.all_currencies).length === 0)
         {
             Currency.fill_currencies(countries);
         }
 
         for (let i = 0; i < this.currencies.length; i++) {
-            tab[this.currencies[i]] = Currency.all_currencies[this.currencies[i]];
+            tab.push(Currency.all_currencies[this.currencies[i]]);
         }
         return tab;
     }
 
     getLanguages() {
-        let tab = {};
+        let tab = [];
         if(Object.keys(Language.all_languages).length === 0)
         {
             Language.fill_languages();
         }
 
         for (let i = 0; i < this.languages.length; i++) {
-            tab[this.languages[i]] = Language.all_languages[this.languages[i]];
+            tab.push(Language.all_languages[this.languages[i]]);
         }
         return tab;
     }
@@ -127,3 +127,4 @@ class Country
         })
     }
 }
+
