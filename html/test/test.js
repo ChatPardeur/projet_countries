@@ -14,6 +14,7 @@ function outsideTheContinent()
             }
         });
     });
+    console.log("Tableau des pays dont au moins un pays frontalier n’est pas dans le même continent :");
     console.table(tab);
 }
 
@@ -71,7 +72,7 @@ function neighborless()
         }
     })
 
-    console.log("les pays n'ayant aucun voisins")
+    console.log("Tableau des pays n'ayant aucun voisins :")
     console.table(neighborlessCountries)
 }
 
@@ -86,6 +87,7 @@ function moreLanguages()
         tab.push([ordre[i].alpha3code, ordre[i].getLanguages()]);
         i += 1;
     }
+    console.log("Tableau des pays parlant le plus de langues (avec les langues associées) :");
     console.table(tab);
 }
 
@@ -112,6 +114,7 @@ function withCommonLanguage()
             }
         });
     });
+    console.log("Tableau des pays ayant au moins un voisin parlant l’une de ses langues, avec les pays voisins et les langues associés :");
     console.table(tab);
 }
 
@@ -158,6 +161,7 @@ function sortingDecreasingDensity()
         let popDensityB = b.getPopDensity() == null ? -1 : parseFloat(b.getPopDensity());
         return popDensityB - popDensityA;
     });
+    console.log("Tableau des pays triés par ordre décroissant de densité de population :");
     console.table(ordre);
 }
 
@@ -175,6 +179,7 @@ function moreTopLevelDomains()
         tab.push([ordre[i].alpha3code, ordre[i].domain]);
         i += 1;
     }
+    console.log("Tableau des pays ayant plusieurs Top Level Domains Internet :");
     console.log(tab);
 }
 
