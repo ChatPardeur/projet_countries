@@ -15,7 +15,6 @@ function outsideTheContinent()
         });
     });
     console.table(tab);
-    return tab;
 }
 
 function compareAmountOfNeighbors(c1, c2)
@@ -152,7 +151,15 @@ function withoutCommonCurrency()
 function sortingDecreasingDensity()
 // Tableau des pays triés par ordre décroissant de densité de population
 {
-
+    let ordre = Object.values(Country.all_countries).sort((a, b) => {
+        let popDensityA = a.getPopDensity() == null ? -1 : parseFloat(a.getPopDensity());
+        let popDensityB = b.getPopDensity() == null ? -1 : parseFloat(b.getPopDensity());
+        return popDensityB - popDensityA;
+    });
+    ordre.forEach(element => {
+        console.log(element.getPopDensity());
+    });
+    console.table(ordre);
 }
 
 function moreTopLevelDomains()
@@ -170,6 +177,3 @@ function moreTopLevelDomains()
     console.log(tab);
 }
 
-Object.values(Country.all_countries).forEach(country => {
-   console.log(country.getPopDensity())
-})
