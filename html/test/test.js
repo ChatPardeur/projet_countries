@@ -56,7 +56,7 @@ function moreNeighbors()
         i++
     }
 
-    console.log("maximum de voisins : " + maxNeighbors)
+    console.log("maximum de voisins : " + maxNeighbors) 
     console.log("pays : ")
     console.table(maxCountries)
 }
@@ -97,11 +97,38 @@ function withCommonLanguage()
 
 }
 
+
 function withoutCommonCurrency()
 // Tableau des pays sans aucun voisin ayant au moins une de ses monnaies
 {
+    let countriesWithoutCommonCurrency = []                         // tableau qui va contenir les pays sans voisins partageant une même monnaie
 
+    Object.values(Country.all_countries).forEach(country => {
+        let neighbors = country.getBorders()
+
+        let indexBorders = 0
+        let valid = true
+        
+        while (valid && indexBorders < neighbors.length)            // on regarde si parmis les voisins du pays, l'u d'eux partage une même monnaie
+        {
+            let neighbor = neighbors[indexBorders]
+            if(country.currencies.some(currency => neighbor.currencies.includes(currency)))
+            {
+                valid = false                                       // si c'est la cas, on met le booléen valide à false, ce qui stoppe la recherhe
+            }
+
+            indexBorders++
+        }
+
+        if(valid)                                                   // si on a parcouru tous les voisins du pays sans trouver de monnaie commune, 
+        {
+            countriesWithoutCommonCurrency.push(country)            // alors on ajoute le pays dans le tableau
+        }
+    })
+
+    return countriesWithoutCommonCurrency
 }
+
 
 function sortingDecreasingDensity()
 // Tableau des pays triés par ordre décroissant de densité de population
