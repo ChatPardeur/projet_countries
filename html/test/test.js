@@ -87,14 +87,33 @@ function moreLanguages()
         tab.push([ordre[i].alpha3code, ordre[i].getLanguages()]);
         i += 1;
     }
-    console.log(tab);
+    console.table(tab);
 }
 
 function withCommonLanguage()
 // Tableau des pays ayant au moins un voisin parlant l’une de ses langues. 
 //  Affichez aussi les pays voisins (objets Country) et les langues en question (objets Language)
 {
-
+    tab = [];
+    let index = -1;
+    Object.values(Country.all_countries).forEach(pays => {
+        let langPays = pays.getLanguages();
+        pays.getBorders().forEach(voisin => {
+            let langVoisin = voisin.getLanguages();
+            let nouv = true;
+            for (let i = 0; i < langVoisin.length; i++) {
+                if (langPays.includes(langVoisin[i])) {
+                    if (nouv == true) {
+                        nouv = false;
+                        index += 1;
+                        tab.push([pays, voisin, []]);
+                    }
+                    tab[index][2].push(langVoisin[i]);
+                }
+            }
+        });
+    });
+    console.table(tab);
 }
 
 
