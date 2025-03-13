@@ -68,7 +68,7 @@ class Country
 
     getPopDensity()
     {
-        return this.population / this.superficie
+        return  this.superficie == null ? null : this.population / this.superficie
     }
 
     getBorders()
@@ -114,10 +114,10 @@ class Country
 
             this.all_countries[country.alpha3Code] = new Country(country.alpha3Code, 
                 names, 
-                country.capital, 
+                country.capital == undefined ? null : country.capital,      // si le pays n'a pas de capitale 
                 country.region, 
                 country.population,
-                country.area, 
+                country.area == undefined ? null : country.area,            // si le pays n'a pas de superficie
                 borders, 
                 country.demonym, 
                 country.topLevelDomain, 

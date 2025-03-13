@@ -139,5 +139,18 @@ function sortingDecreasingDensity()
 function moreTopLevelDomains()
 // Tableau des pays ayant plusieurs Top Level Domains Internet
 {
-
+    let tab = [];
+    let ordre = Object.values(Country.all_countries).sort((c1, c2) => c2.domain.length - c1.domain.length);
+    
+    tab.push([ordre[0].alpha3code, ordre[0].domain]);
+    let i = 1;
+    while (ordre[i].domain.length == ordre[0].domain.length) {
+        tab.push([ordre[i].alpha3code, ordre[i].domain]);
+        i += 1;
+    }
+    console.log(tab);
 }
+
+Object.values(Country.all_countries).forEach(country => {
+   console.log(country.getPopDensity())
+})
