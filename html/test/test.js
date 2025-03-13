@@ -174,3 +174,13 @@ function moreTopLevelDomains()
     console.log(tab);
 }
 
+
+/* ----------------- Boutons de test ----------------- */
+document.getElementById("btn_outsideTheContinent").addEventListener("click", outsideTheContinent)
+document.getElementById("btn_moreNeighbors").addEventListener("click", moreNeighbors)
+document.getElementById("btn_neighborless").addEventListener("click", neighborless)
+document.getElementById("btn_moreLanguages").addEventListener("click", moreLanguages)
+document.getElementById("btn_withCommonLanguage").addEventListener("click", withCommonLanguage)
+document.getElementById("btn_withoutCommonCurrency").addEventListener("click", withoutCommonCurrency)
+document.getElementById("btn_sortingDecreasingDensity").addEventListener("click", sortingDecreasingDensity)
+document.getElementById("btn_moreTopLevelDomains").addEventListener("click", moreTopLevelDomains)
