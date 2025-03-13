@@ -112,16 +112,17 @@ class Country
                 currencies.push(currency.code)
             })
 
-            this.all_countries[country.alpha3Code] = new Country(country.alpha3Code, 
+            this.all_countries[country.alpha3Code] = new Country(               // met la valeur à null si elle n'est pas trouvée dans countries.js (exemple : UMI n'a pas de capitale ou de superficie)
+                country.alpha3Code == undefined ? null : country.alpha3Code, 
                 names, 
-                country.capital == undefined ? null : country.capital,      // si le pays n'a pas de capitale 
-                country.region, 
-                country.population,
-                country.area == undefined ? null : country.area,            // si le pays n'a pas de superficie
-                borders, 
-                country.demonym, 
-                country.topLevelDomain, 
-                country.flags.svg,
+                country.capital == undefined ? null : country.capital,
+                country.region == undefined ? null : country.region, 
+                country.population == undefined ? null : country.population,
+                country.area == undefined ? null : country.area,
+                borders == undefined ? null : country.borders, 
+                country.demonym == undefined ? null : country.demonym, 
+                country.topLevelDomain == undefined ? null : country.topLevelDomain, 
+                country.flags.svg == undefined ? null : country.flags.svg,
                 languages, 
                 currencies)
         })
