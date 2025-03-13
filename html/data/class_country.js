@@ -119,7 +119,7 @@ class Country
                 country.region == undefined ? null : country.region, 
                 country.population == undefined ? null : country.population,
                 country.area == undefined ? null : country.area,
-                borders == undefined ? null : country.borders, 
+                borders, 
                 country.demonym == undefined ? null : country.demonym, 
                 country.topLevelDomain == undefined ? null : country.topLevelDomain, 
                 country.flags.svg == undefined ? null : country.flags.svg,
