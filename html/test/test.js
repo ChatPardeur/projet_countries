@@ -180,7 +180,7 @@ function moreTopLevelDomains()
         i += 1;
     }
     console.log("Tableau des pays ayant plusieurs Top Level Domains Internet :");
-    console.log(tab);
+    console.table(tab);
 }
 
 
