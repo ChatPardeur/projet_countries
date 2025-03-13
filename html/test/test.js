@@ -156,9 +156,6 @@ function sortingDecreasingDensity()
         let popDensityB = b.getPopDensity() == null ? -1 : parseFloat(b.getPopDensity());
         return popDensityB - popDensityA;
     });
-    ordre.forEach(element => {
-        console.log(element.getPopDensity());
-    });
     console.table(ordre);
 }
 
