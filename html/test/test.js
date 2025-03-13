@@ -119,6 +119,7 @@ function withCommonLanguage()
 function withoutCommonCurrency()
 // Tableau des pays sans aucun voisin ayant au moins une de ses monnaies
 {
+
     let countriesWithoutCommonCurrency = []                         // tableau qui va contenir les pays sans voisins partageant une même monnaie
 
     Object.values(Country.all_countries).forEach(country => {
@@ -151,6 +152,7 @@ function withoutCommonCurrency()
 function sortingDecreasingDensity()
 // Tableau des pays triés par ordre décroissant de densité de population
 {
+
     let ordre = Object.values(Country.all_countries).sort((a, b) => {
         let popDensityA = a.getPopDensity() == null ? -1 : parseFloat(a.getPopDensity());
         let popDensityB = b.getPopDensity() == null ? -1 : parseFloat(b.getPopDensity());
@@ -162,6 +164,8 @@ function sortingDecreasingDensity()
 function moreTopLevelDomains()
 // Tableau des pays ayant plusieurs Top Level Domains Internet
 {
+    console.clear()
+
     let tab = [];
     let ordre = Object.values(Country.all_countries).sort((c1, c2) => c2.domain.length - c1.domain.length);
     
@@ -176,11 +180,12 @@ function moreTopLevelDomains()
 
 
 /* ----------------- Boutons de test ----------------- */
-document.getElementById("btn_outsideTheContinent").addEventListener("click", outsideTheContinent)
-document.getElementById("btn_moreNeighbors").addEventListener("click", moreNeighbors)
-document.getElementById("btn_neighborless").addEventListener("click", neighborless)
-document.getElementById("btn_moreLanguages").addEventListener("click", moreLanguages)
-document.getElementById("btn_withCommonLanguage").addEventListener("click", withCommonLanguage)
-document.getElementById("btn_withoutCommonCurrency").addEventListener("click", withoutCommonCurrency)
-document.getElementById("btn_sortingDecreasingDensity").addEventListener("click", sortingDecreasingDensity)
-document.getElementById("btn_moreTopLevelDomains").addEventListener("click", moreTopLevelDomains)
+
+document.getElementById("btn_outsideTheContinent").addEventListener("click",() => {console.clear(); outsideTheContinent()})
+document.getElementById("btn_moreNeighbors").addEventListener("click", () => {console.clear(); moreNeighbors()})
+document.getElementById("btn_neighborless").addEventListener("click", () => {console.clear(); neighborless()})
+document.getElementById("btn_moreLanguages").addEventListener("click", () => {console.clear(); moreLanguages()})
+document.getElementById("btn_withCommonLanguage").addEventListener("click", () => {console.clear(); withCommonLanguage()})
+document.getElementById("btn_withoutCommonCurrency").addEventListener("click", () => {console.clear(); withoutCommonCurrency()})
+document.getElementById("btn_sortingDecreasingDensity").addEventListener("click", () => {console.clear(); sortingDecreasingDensity()})
+document.getElementById("btn_moreTopLevelDomains").addEventListener("click", () => {console.clear(); moreTopLevelDomains()})
