@@ -148,7 +148,7 @@ function withoutCommonCurrency()
         }
     })
 
-    return countriesWithoutCommonCurrency
+    console.log(countriesWithoutCommonCurrency)
 }
 
 
@@ -191,6 +191,6 @@ document.getElementById("btn_moreNeighbors").addEventListener("click", () => {co
 document.getElementById("btn_neighborless").addEventListener("click", () => {console.clear(); neighborless()})
 document.getElementById("btn_moreLanguages").addEventListener("click", () => {console.clear(); moreLanguages()})
 document.getElementById("btn_withCommonLanguage").addEventListener("click", () => {console.clear(); withCommonLanguage()})
-document.getElementById("btn_withoutCommonCurrency").addEventListener("click", () => {console.clear(); withoutCommonCurrency()})
+document.getElementById("btn_withoutCommonCurrency").addEventListener("click", () => {withoutCommonCurrency()})
 document.getElementById("btn_sortingDecreasingDensity").addEventListener("click", () => {console.clear(); sortingDecreasingDensity()})
 document.getElementById("btn_moreTopLevelDomains").addEventListener("click", () => {console.clear(); moreTopLevelDomains()})
