@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Template du tableau de pays</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        th, td {
+            padding: 8px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        
+        th {
+            background-color: #f2f2f2;
+        }
+        
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        
+        td img {
+            width: 30px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+              <th scope="col">Nom en français</th>
+              <th scope="col">Population</th>
+              <th scope="col">Surface</th>
+              <th scope="col">Densité de population</th>
+              <th scope="col">Continent d’appartenance</th>
+              <th scope="col">Drapeau</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">France</th>
+              <td>67391582</td>
+              <td>640679.0</td>
+              <td>105.19</td>
+              <td>Europe</td>
+              <td><img src="https://flagcdn.com/fr.svg" alt="Drapeau de la France"></td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>
