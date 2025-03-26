@@ -68,7 +68,7 @@ class Country
 
     getPopDensity()
     {
-        return  this.superficie == null ? null : this.population / this.superficie
+        return this.superficie == null ? null : this.population / this.superficie;
     }
 
     getBorders()
