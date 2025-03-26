@@ -55,7 +55,7 @@ tr:hover{
 }
 
 
-#listeDetail{
+#overlay #listeDetail{
     display: flex;
     flex-wrap: wrap;
     background-color: white;
@@ -63,7 +63,12 @@ tr:hover{
     border-radius: 10px;
 }
 
-#listeDetail > li{
+#overlay #listeDetail > li{
     list-style-type: none;
     padding: 10px;
+}
+
+#overlay img{
+    border-radius: 15px;
+    margin: 15px;
 }

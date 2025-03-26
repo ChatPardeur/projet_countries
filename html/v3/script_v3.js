@@ -52,6 +52,7 @@ $(document).ready(function() {
                         $("<img>")
                             .attr("src", country.flag)
                             .attr("alt", "Drapeau de " + nomP)
+                            .attr("class", "drapeau")
                     )
                 )
             );
@@ -59,7 +60,17 @@ $(document).ready(function() {
 
         $("#numPage").text("Page " + currentPage + " / " + Math.ceil(Object.values(Country.all_countries).length / 25));
 
-        $("tr").on("click", afficheDetail) // permet d'afficher le détail sur les pays chargés 
+        $("tr").on("click", (event) => {
+            if(event.target.classList.contains("drapeau"))
+            {
+                afficherDrapeau(event)
+            }
+            else
+            {
+                afficheDetail(event)
+            }
+
+        } ) // permet d'afficher le détail sur les pays chargés 
 
     }
 
@@ -82,16 +93,16 @@ $(document).ready(function() {
 
     /* ------------------- V3 ------------------- */
 
-
+    // détail
     let overlay = $("#overlay");
 
     $("#overlay").children("button").on("click", function(){
         overlay[0].style.display = "none";
-        overlay.children("ul").remove()
+        overlay.children(":not(button)").remove()
     })
 
 
-    function afficheDetail(){
+    function afficheDetail(event){
 
         let country = Country.all_countries[event.currentTarget.id];
 
@@ -250,9 +261,19 @@ $(document).ready(function() {
         overlay.prepend(liste)
 
         overlay[0].style.display = "flex"
+    }
 
+    // drapeau
+    function afficherDrapeau(event)
+    {
+        let country = Country.all_countries[event.currentTarget.id];
+        let liste = $("<ul>").attr("id", "listeDetail")
 
-        // fonction ajoutée ligne 62 dans remplirTab()
+        let imgDrapeau = $("<img>").attr("src", country.flag)
+
+        overlay.prepend(imgDrapeau)
+        overlay[0].style.display = "flex"
+
     }
 
     /* -------------------- raccourcis clavier -------------------- */
@@ -263,7 +284,7 @@ $(document).ready(function() {
             if(overlay[0].style.display = "flex")
             {
                 overlay[0].style.display = "none"
-                overlay.children("ul").remove()
+                overlay.children(":not(button)").remove()
             }
         }
        
