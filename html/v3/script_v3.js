@@ -58,6 +58,9 @@ $(document).ready(function() {
         });
 
         $("#numPage").text("Page " + currentPage + " / " + Math.ceil(Object.values(Country.all_countries).length / 25));
+
+        $("tr").on("click", afficheDetail) // permet d'afficher le détail sur les pays chargés 
+
     }
 
     $("#prec").click(function() {
@@ -87,17 +90,17 @@ $(document).ready(function() {
         overlay.children("ul").remove()
     })
 
-    $("tr").on("click", function(){
 
+    function afficheDetail(){
 
         let country = Country.all_countries[event.currentTarget.id];
 
         let liste = $("<ul>").attr("id", "listeDetail")
 
-
+        // noms du pays
         liste.append(
             $("<li>").append(
-                $("<p>").text("Noms"),
+                $("<h3>").text("Noms"),
                 $("<ul>")
             )
         )
@@ -110,9 +113,10 @@ $(document).ready(function() {
             )
         })
 
+        // pays voisins
         liste.append(
             $("<li>").append(
-                $("<p>").text("Pays voisins"),
+                $("<h3>").text("Pays voisins"),
                 $("<ul>")
             )
         )
@@ -129,43 +133,139 @@ $(document).ready(function() {
         else
         {
             neighbors.forEach(neighbor => {
+                liste.children("li:last").children("ul").append(
+                    $("<li>").append(
+                        $("<p>").text(neighbor.names["fr"])
+                    )
+                )
+            })
+        }
+
+        // monnaies
+        liste.append(
+            $("<li>").append(
+                $("<h3>").text("Monnaies"),
+                $("<ul>")
+            )
+        )
+
+        let currencies = country.getCurrencies()
+        if(currencies.length == 0)
+        {
             liste.children("li:last").children("ul").append(
                 $("<li>").append(
-                    $("<p>").text(neighbor.names["fr"])
+                    $("<p>").text("aucune monnaie")
                 )
             )
-        })
+        }
+        else
+        {
+            currencies.forEach(currency => {
+                liste.children("li:last").children("ul").append(
+                    $("<li>").append(
+                        $("<p>").text(currency.nom)
+                    )
+                )
+            })
+        }
+
+        // languages
+        liste.append(
+            $("<li>").append(
+                $("<h3>").text("Languages"),
+                $("<ul>")
+            )
+        )
+
+        let languages = country.getLanguages()
+        if(languages.length == 0)
+        {
+            liste.children("li:last").children("ul").append(
+                $("<li>").append(
+                    $("<p>").text("aucun language")
+                )
+            )
+        }
+        else
+        {
+            languages.forEach(language => {
+                liste.children("li:last").children("ul").append(
+                    $("<li>").append(
+                        $("<p>").text(language.name)
+                    )
+                )
+            })
         }
 
 
+        // capitale
         liste.append(
             $("<li>").append(
-                $("<p>").text("Capitale")
-            ),
-            $("<ul>").append(
-                $("<li>").append(
-                    $("<p>").text(country.capital)
+                $("<h3>").text("Capitale"),
+                $("<ul>").append(
+                    $("<li>").append(
+                        $("<p>").text(country.capital)
+                    )
                 )
             )
         )
 
+        // alpha3code
         liste.append(
             $("<li>").append(
-                $("<p>").text("Alpha3Code")
-            ),
-            $("<ul>").append(
-                $("<li>").append(
-                    $("<p>").text(country.alpha3code)
+                $("<h3>").text("Alpha3Code"),
+                $("<ul>").append(
+                    $("<li>").append(
+                        $("<p>").text(country.alpha3code)
+                    )
+                )
+            )
+        )
+
+        // gentile
+        liste.append(
+            $("<li>").append(
+                $("<h3>").text("Gentile"),
+                $("<ul>").append(
+                    $("<li>").append(
+                        $("<p>").text(country.gentile)
+                    )
+                )
+            )
+        )
+
+        // nom de domaine
+        liste.append(
+            $("<li>").append(
+                $("<h3>").text("Nom de domaine"),
+                $("<ul>").append(
+                    $("<li>").append(
+                        $("<p>").text(country.domain)
+                    )
                 )
             )
         )
 
 
-
-
-        overlay.append(liste)
+        overlay.prepend(liste)
 
         overlay[0].style.display = "flex"
+
+
+        // fonction ajoutée ligne 62 dans remplirTab()
+    }
+
+    /* -------------------- raccourcis clavier -------------------- */
+
+    document.addEventListener("keydown", (event) => {
+        if(event.key === "Escape")
+        {
+            if(overlay[0].style.display = "flex")
+            {
+                overlay[0].style.display = "none"
+                overlay.children("ul").remove()
+            }
+        }
+       
     })
 });
-

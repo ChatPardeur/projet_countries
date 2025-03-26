@@ -1,3 +1,7 @@
+*{
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -47,11 +51,19 @@ tr:hover{
     align-items: center;
     z-index: 100;
     flex-direction: column;
-    color: white;
+    color: black;
 }
 
-/*
+
 #listeDetail{
     display: flex;
-    gap: 20px;
-}*/
+    flex-wrap: wrap;
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+}
+
+#listeDetail > li{
+    list-style-type: none;
+    padding: 10px;
+}
