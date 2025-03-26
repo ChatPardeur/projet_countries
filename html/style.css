@@ -22,7 +22,7 @@ td img {
     height: auto;
 }
 
-div {
+.divBtn {
     display: flex;
     flex-direction: row;
     align-items: center;
