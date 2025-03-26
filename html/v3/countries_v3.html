@@ -5,9 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>V3</title>
     <link rel="stylesheet" href="../style.css">
-
 </head>
 <body>
+    <div id="overlay">
+        <button>fermer</button>
+    </div>
     <table id="tableauCountries">
         <thead>
             <tr>
@@ -23,6 +25,13 @@
 
           </tbody>
     </table>
+
+    <div class="divBtn">
+      <button id="prec">Précédent</button>
+      <p id="numPage"></p>
+      <button id="suiv">Suivant</button>
+    </div>
+
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../data/countries.js"></script>

@@ -115,7 +115,7 @@ class Country
             this.all_countries[country.alpha3Code] = new Country(               // met la valeur à null si elle n'est pas trouvée dans countries.js (exemple : UMI n'a pas de capitale ou de superficie)
                 country.alpha3Code == undefined ? null : country.alpha3Code, 
                 names, 
-                country.capital == undefined ? null : country.capital,
+                country.capital == undefined ? null : country.capital,  
                 country.region == undefined ? null : country.region, 
                 country.population == undefined ? null : country.population,
                 country.area == undefined ? null : country.area,
