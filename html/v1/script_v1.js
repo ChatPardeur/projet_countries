@@ -11,23 +11,23 @@ $(document).ready(function() {
         //Puis on ajoute le pays au tableau
         let nomP = country.names["fr"];
         if (nomP == null) {
-            nomP = "/";
+            nomP = "N/A";
         }
         let popP = country.population;
         if (popP == null) {
-            popP = "/";
+            popP = "N/A";
         }
         let supP = country.superficie;
         if (supP == null) {
-            supP = "/";
+            supP = "N/A";
         }
         let densP = country.getPopDensity();
         if (densP == null) {
-            densP = "/";
+            densP = "N/A";
         }
         let cont = country.continent;
         if (cont == null) {
-            cont = "/";
+            cont = "N/A";
         }
         
         //Puis on ajoute le pays au tableau

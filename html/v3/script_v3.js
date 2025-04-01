@@ -3,7 +3,20 @@ Country.fill_countries();
 $(document).ready(function() {
     // Le DOM est complet et prêt à être modifié
     let tbody = $("#tableauCountries tbody");
-    let pageActu = 1;
+
+    if (!document.cookie.includes("pageActu")) {
+        document.cookie = "pageActu=1;expires=31 Dec 2026 23:59:59 GMT;path=/;SameSite=Lax";
+    }
+
+    function getCookie(name) {
+        let cookies = document.cookie.split(";");
+        for (let cookie of cookies) {
+            let [key, value] = cookie.split("=");
+            if (key.trim() == name) {
+                return value;
+            }
+        }
+    }
 
     function remplirTab(currentPage) {
         tbody.empty();
@@ -19,23 +32,23 @@ $(document).ready(function() {
 
             let nomP = country.names["fr"];
             if (nomP == null) {
-                nomP = "/";
+                nomP = "N/A";
             }
             let popP = country.population;
             if (popP == null) {
-                popP = "/";
+                popP = "N/A";
             }
             let supP = country.superficie;
             if (supP == null) {
-                supP = "/";
+                supP = "N/A";
             }
             let densP = country.getPopDensity();
             if (densP == null) {
-                densP = "/";
+                densP = "N/A";
             }
             let cont = country.continent;
             if (cont == null) {
-                cont = "/";
+                cont = "N/A";
             }
             
             //Puis on ajoute le pays au tableau
@@ -75,20 +88,24 @@ $(document).ready(function() {
     }
 
     $("#prec").click(function() {
+        let pageActu = getCookie("pageActu");
         if (pageActu > 1) {
             pageActu--;
+            document.cookie = "pageActu=" + pageActu + ";expires=Fri, 31 Dec 2026 23:59:59 GMT;path=/";
             remplirTab(pageActu);
         }
     });
 
     $("#suiv").click(function() {
+        let pageActu = getCookie("pageActu");
         if (pageActu < Math.ceil(Object.values(Country.all_countries).length / 25)) {
             pageActu++;
+            document.cookie = "pageActu=" + pageActu + ";expires=Fri,31Dec202623:59:59GMT;path=/";
             remplirTab(pageActu);
         }
     });
-
-    remplirTab(pageActu);
+    
+    remplirTab(getCookie("pageActu"));
 
 
     /* ------------------- V3 ------------------- */
