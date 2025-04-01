@@ -65,7 +65,7 @@ $(document).ready(function() {
 
         $("#numPage").text("Page " + currentPage + " / " + Math.ceil(Object.values(countries_filtre).length / 25));
 
-        $("tr td").on("click", (event) => {
+        $("tr:has(td)").on("click", (event) => {
             if(event.target.classList.contains("drapeau"))
             {
                 afficherDrapeau(event)
@@ -291,6 +291,18 @@ $(document).ready(function() {
             )
         )
 
+        // drapeau
+        liste.append(
+            $("<li>").append(
+                $("<h3>").text("Drapeau"),
+                $("<ul>").append(
+                    $("<li>").append(
+                        $("<img>").attr("src", country.flag)
+                    )
+                )
+            )
+        )
+
 
         overlay.prepend(liste)
 
@@ -310,25 +322,41 @@ $(document).ready(function() {
 
     }
 
+    /* ----------- V5 ----------- */
 
-        /* -------------------- raccourcis clavier -------------------- */
+    $("th[id]").on("click", (event) => {
+        let id = event.target.id
+        console.log(id)
+    })
 
-        document.addEventListener("keydown", (event) => {
-            if(event.key === "Escape")
+    function sortCountries(attribut)
+    {
+        if(["name", "population", "superficie", "density", "continent"].includes(attribut))
+        {
+            console.log("entries")
+            Country.all_countries = Object.fromEntries(Object.entries(Country.all_countries).sort(([, c1], [, c2]) => Country.compare(c1, c2, attribut)))
+            console.log(Country.all_countries)
+        }
+        else
+        {
+            console.log("attribut de tri incorrect")
+        }
+    }
+
+
+    sortCountries("population")
+
+
+    /* -------------------- raccourcis clavier -------------------- */
+
+    document.addEventListener("keydown", (event) => {
+        if(event.key === "Escape")
+        {
+            if(overlay[0].style.display = "flex")
             {
-                if(overlay[0].style.display = "flex")
-                {
-                    overlay[0].style.display = "none"
-                    overlay.children(":not(button)").remove()
-                }
+                overlay[0].style.display = "none"
+                overlay.children(":not(button)").remove()
             }
-        })
-
-
-
-        /* ----------- V5 ----------- */
-        $("th").add("click", (event) => {
-            console.log(event.target.id)
-        })
+        }
+    })
 });
-

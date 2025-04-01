@@ -182,7 +182,8 @@ class Country
                 }
 
             case "continent":
-                return c1.continent.localeCompare(c2.continent) != 0 ? c1.continent.localeCompare(c2.continent) : Country.compare(c1, c2, "name")
+                return c1.continent.localeCompare(c2.continent)
+
             default:
                 return 0
         }

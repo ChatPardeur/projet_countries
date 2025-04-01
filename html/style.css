@@ -75,6 +75,10 @@ button {
     margin: 15px;
 }
 
+#listeDetail img{
+    width: 20%;
+}
+
 #menuFiltre {
     display: flex;
     justify-content: space-between;

@@ -366,6 +366,17 @@ $(document).ready(function() {
             )
         )
 
+        // drapeau
+        liste.append(
+            $("<li>").append(
+                $("<h3>").text("Drapeau"),
+                $("<ul>").append(
+                    $("<li>").append(
+                        $("<img>").attr("src", country.flag)
+                    )
+                )
+            )
+        )
 
         overlay.prepend(liste)
 
