@@ -65,7 +65,7 @@ $(document).ready(function() {
 
         $("#numPage").text("Page " + currentPage + " / " + Math.ceil(Object.values(countries_filtre).length / 25));
 
-        $("tr").on("click", (event) => {
+        $("tr:has(td)").on("click", (event) => {
             if(event.target.classList.contains("drapeau"))
             {
                 afficherDrapeau(event)
