@@ -3,11 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>V5</title>
+    <title>V4</title>
     <link rel="stylesheet" href="../style.css">
 
 </head>
 <body>
+    <section id="menuFiltre">
+        <div>
+            <label for="searchNom">Nom du pays (fr / en) :</label>
+            <input id="searchNom" name="searchNom" type="text">
+        </div>
+        <div>
+          
+        </div>
+    </section>
+    <div id="overlay">
+      <button>fermer (échap)</button>
+  </div>
     <table id="tableauCountries">
         <thead>
             <tr>
@@ -23,11 +35,18 @@
 
           </tbody>
     </table>
+
+    <div class="divBtn">
+      <button id="prec">Précédent</button>
+      <p id="numPage"></p>
+      <button id="suiv">Suivant</button>
+    </div>
+
 </body>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="../data/countries.js"></script>
 <script src="../data/class_language.js"></script>
 <script src="../data/class_currency.js"></script>
 <script src="../data/class_country.js"></script>
-<script src="script_v5.js"></script>
+<script src="script_v4.js"></script>
 </html>

@@ -127,5 +127,67 @@ class Country
                 currencies)
         })
     }
+
+    static compare(c1, c2, attribut)        // prends en paramètres 2 instances de Country et l'attribut sur lequel les comparer.
+                                            // renvoie 1 si c1.attribut > c2.attribut, -1 si c1.attribut < c2.attribut, 0 l'attribut entré 
+                                            // est invalide ou si c1 = c2
+                                            // si les pays sont égaux sur l'attribut entré, alors compare les pays sur leur nom français
+                                            // les attributs possibles sont ceut utilisés pour trier le tableau lors de la partie 2
+    {
+        switch (attribut) {
+            case "name":
+                return c1.names["fr"].localeCompare(c2.names["fr"])
+
+            case "population":
+                if(c1.population > c2.population)
+                {
+                    return 1
+                }
+                else if(c1.population < c2.population)
+                {
+                    return -1
+                }
+                else
+                {
+                    return Country.compare(c1, c2, "name")
+                }
+            
+
+            case "superficie":
+                if(c1.superficie > c2.superficie)
+                {
+                    return 1
+                }
+                else if(c1.superficie < c2.superficie)
+                {
+                    return -1
+                }
+                else
+                {
+                    return Country.compare(c1, c2, "name")
+                }
+            
+            case "density":
+                if(c1.getPopDensity() > c2.getPopDensity())
+                {
+                    return 1
+                }
+                else if(c1.getPopDensity() < c2.getPopDensity())
+                {
+                    return -1
+                }
+                else
+                {
+                    return Country.compare(c1, c2, "name")
+                }
+
+            case "continent":
+                return c1.continent.localeCompare(c2.continent) != 0 ? c1.continent.localeCompare(c2.continent) : Country.compare(c1, c2, "name")
+            default:
+                return 0
+        }
+    }
 }
 
+let c1 = new Country()
+console.log(c1.continent)
