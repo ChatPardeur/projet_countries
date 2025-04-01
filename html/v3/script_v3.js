@@ -94,6 +94,7 @@ $(document).ready(function() {
     /* ------------------- V3 ------------------- */
 
     // détail
+    
     let overlay = $("#overlay");
 
     $("#overlay").children("button").on("click", function(){
