@@ -6,6 +6,53 @@ $(document).ready(function() {
     let pageActu = 1;
 
     let filtreNom = $("#searchNom");
+    let filtreCont = $("#cont-select");
+    let filtreLang = $("#lang-select");
+
+    // On remplie les listes dépliantes des filtres...
+
+    // ...des contients
+    let listeCont = [];
+    Object.values(Country.all_countries).forEach(pays => {
+        if (!listeCont.includes(pays.continent)) {
+            listeCont.push(pays.continent);
+        }
+    });
+
+    let listContTries = listeCont.sort((a, b) => {
+        if (a < b) return -1;
+        if (a > b) return 1;
+        return 0;
+    });
+
+    for (let cont of listContTries) {
+        filtreCont.append(
+                $("<option>")
+                .attr("value", cont)
+                .text(cont)
+        )
+    }
+
+    // ...des langues
+    if(Object.keys(Language.all_languages).length === 0)
+    {
+        Language.fill_languages();
+    }
+
+    let listLangTriees = Object.values(Language.all_languages).sort((a, b) => {
+        if (a.name < b.name) return -1;
+        if (a.name > b.name) return 1;
+        return 0;
+    });
+    
+    for (let lang of listLangTriees) {
+        filtreLang.append(
+                $("<option>")
+                .attr("value", lang.name)
+                .text(lang.name)
+        )
+    }
+
 
     function remplirTab(currentPage) {
         tbody.empty();
@@ -24,23 +71,23 @@ $(document).ready(function() {
 
             let nomP = country.names["fr"];
             if (nomP == null) {
-                nomP = "/";
+                nomP = "N/a";
             }
             let popP = country.population;
             if (popP == null) {
-                popP = "/";
+                popP = "N/a";
             }
             let supP = country.superficie;
             if (supP == null) {
-                supP = "/";
+                supP = "N/a";
             }
             let densP = country.getPopDensity();
             if (densP == null) {
-                densP = "/";
+                densP = "N/a";
             }
             let cont = country.continent;
             if (cont == null) {
-                cont = "/";
+                cont = "N/a";
             }
             
             //Puis on ajoute le pays au tableau
@@ -98,10 +145,38 @@ $(document).ready(function() {
             }
         }
 
+        if (filtreCont.val() != "") {
+            if (pays.continent != filtreCont.val()) {
+                match = false;
+            }
+        }
+        
+        if (filtreLang.val() != "") {
+            let it = 0;
+            let matchLocal = false;
+            while ((matchLocal == false) && (it < pays.languages.length)) {
+                if (Language.all_languages[pays.languages[it]].name == filtreLang.val()) {
+                    matchLocal = true;
+                }
+                it++;
+            }
+            if ((matchLocal == false) && (match == true)) {
+                match = false;
+            }
+        }
+
         return match;
     }
 
     filtreNom.on("input", function() {
+        remplirTab(pageActu);
+    });
+
+    filtreCont.on("change", function () {
+        remplirTab(pageActu);
+    });
+
+    filtreLang.on("change", function () {
         remplirTab(pageActu);
     });
 

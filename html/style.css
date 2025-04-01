@@ -30,9 +30,7 @@ td img {
     display: flex;
     flex-direction: row;
     align-items: center;
-    width: 90%;
-    justify-content: space-between;
-    margin: auto;
+    justify-content: space-evenly;
 }
 
 tr:hover{
@@ -54,6 +52,10 @@ tr:hover{
     color: black;
 }
 
+button {
+    height: 40px;
+    width: 120px;
+}
 
 #overlay #listeDetail{
     display: flex;
@@ -71,4 +73,35 @@ tr:hover{
 #overlay img{
     border-radius: 15px;
     margin: 15px;
+}
+
+#menuFiltre {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 20px;
+    background-color: #f0f0f0;
+    border-radius: 8px;
+}
+
+#menuFiltre div {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    max-width: 300px;
+    width: 100%;
+}
+
+#menuFiltre label {
+    font-size: 14px;
+    font-weight: bold;
+}
+
+#menuFiltre input, #menuFiltre select {
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 14px;
+    background-color: white;
 }
