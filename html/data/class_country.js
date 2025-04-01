@@ -188,6 +188,3 @@ class Country
         }
     }
 }
-
-let c1 = new Country()
-console.log(c1.continent)
