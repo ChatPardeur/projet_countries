@@ -239,15 +239,15 @@ $(document).ready(function() {
 
     // détail
     
-    let overlay = $("#overlay");
+    let overlay = $("#overlay");                        // s'affichera lors du clic d'un pays ou drapeau, et contiendra le contenu voulu
 
-    $("#overlay").children("button").on("click", function(){
+    $("#overlay").children("button").on("click", function() {           // fermer l'overlay et le vider avant sa prochaine ouverture (on conserve le bouton de fermeture)
         overlay[0].style.display = "none";
         overlay.children(":not(button)").remove()
     })
 
 
-    function afficheDetail(event){
+    function afficheDetail(event) {             // affiche les informations d'un pays qui ne sont pas visibles dans le tableau
 
         let country = Country.all_countries[event.currentTarget.id];
 
@@ -420,10 +420,9 @@ $(document).ready(function() {
     }
 
     // drapeau
-    function afficherDrapeau(event)
+    function afficherDrapeau(event)                     // affiche le drapeau
     {
         let country = Country.all_countries[event.currentTarget.id];
-        let liste = $("<ul>").attr("id", "listeDetail")
 
         let imgDrapeau = $("<img>").attr("src", country.flag)
 
@@ -436,27 +435,27 @@ $(document).ready(function() {
         /* ----------- V5 ----------- */
 
         $("th[id]:not(#drapeau)").on("click", (event) => {
-            let attribut = event.currentTarget.id
+            let attribut = event.currentTarget.id                   // l'id du th cliqué correspond au critère utilisé pour trier le tableau
 
-            if($("#" + attribut + " .chevron").text() == "🔽")
+            if($("#" + attribut + " .chevron").text() == "🔽")      // si la colonne est triée dans l'ordre croissant trie les données dans l'ordre décroissant
             {
                 $("#" + attribut + " .chevron").text("🔼")
                 Country.all_countries = Object.fromEntries(Object.entries(Country.all_countries).reverse())
             }
-            else
+            else                                                    // sinon, trie les données dans l'ordre croissant
             {
                 $("#" + attribut + " .chevron").text("🔽")
                 sortCountries(attribut)
             }
 
-            $("th[id]").removeClass("trie")
-            event.currentTarget.classList.add("trie")
+            $("th[id]").removeClass("trie")                         // enlève toutes les classes "trie" que d'autres th pouvaient avoir
+            event.currentTarget.classList.add("trie")               // ajoute la classe "trie" à la colonne concernée
 
 
-            remplirTab(getCookie("pageActu"))
+            remplirTab(getCookie("pageActu"))                       // met à jour le tableau avec les données nouvellement triées
         })
     
-        function sortCountries(attribut)
+        function sortCountries(attribut)                            // trie dans l'ordre croissant Country.allCountries en fonction de l'attribut passé en paramètre
         {
             if(["name", "population", "superficie", "density", "continent"].includes(attribut))
             {
@@ -471,7 +470,7 @@ $(document).ready(function() {
         /* -------------------- raccourcis clavier -------------------- */
 
         document.addEventListener("keydown", (event) => {
-            if(event.key === "Escape")
+            if(event.key === "Escape")                      // fermer l'overlay et le vider avant sa prochaine ouverture (on conserve le bouton de fermeture)
             {
                 if(overlay[0].style.display = "flex")
                 {

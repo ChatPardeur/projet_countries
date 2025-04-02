@@ -1,0 +1,15 @@
+--- PARTIE 1 ---
+
+class_currency - Yan AIT OUAZZOU 100%
+class_language - Baptiste LAMBERT--BRUNEL 100%
+class_country - Baptiste LAMBERT--BRUNEL 100%
+test - Yan AIT OUAZZOU & Baptiste LAMBERT--BRUNEL 50%/50%
+
+
+--- PARTIE 2 ---
+
+v1 - Yan AIT OUAZZOU & Baptiste LAMBERT--BRUNEL 50%/50%
+v2 - Yan AIT OUAZZOU 100%
+v3 - Baptiste LAMBERT--BRUNEL 100%
+v4 - Yan AIT OUAZZOU 100%
+v5 - Baptiste LAMBERT--BRUNEL 100%
