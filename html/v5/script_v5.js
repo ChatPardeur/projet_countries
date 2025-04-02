@@ -3,9 +3,70 @@ Country.fill_countries();
 $(document).ready(function() {
     // Le DOM est complet et prêt à être modifié
     let tbody = $("#tableauCountries tbody");
-    let pageActu = 1;
+    let countries_filtre;
+    
+    if (!document.cookie.includes("pageActu")) {
+        document.cookie = "pageActu=1;expires=31 Dec 2026 23:59:59 GMT;path=/;SameSite=Lax";
+    }
+
+    function getCookie(name) {
+        let cookies = document.cookie.split(";");
+        for (let cookie of cookies) {
+            let [key, value] = cookie.split("=");
+            if (key.trim() == name) {
+                return value;
+            }
+        }
+    }
 
     let filtreNom = $("#searchNom");
+    let filtreCont = $("#cont-select");
+    let filtreLang = $("#lang-select");
+
+    // On remplie les listes dépliantes des filtres...
+
+    // ...des contients
+    let listeCont = [];
+    Object.values(Country.all_countries).forEach(pays => {
+        if (!listeCont.includes(pays.continent)) {
+            listeCont.push(pays.continent);
+        }
+    });
+
+    let listContTries = listeCont.sort((a, b) => {
+        if (a < b) return -1;
+        if (a > b) return 1;
+        return 0;
+    });
+
+    for (let cont of listContTries) {
+        filtreCont.append(
+                $("<option>")
+                .attr("value", cont)
+                .text(cont)
+        )
+    }
+
+    // ...des langues
+    if(Object.keys(Language.all_languages).length === 0)
+    {
+        Language.fill_languages();
+    }
+
+    let listLangTriees = Object.values(Language.all_languages).sort((a, b) => {
+        if (a.name < b.name) return -1;
+        if (a.name > b.name) return 1;
+        return 0;
+    });
+    
+    for (let lang of listLangTriees) {
+        filtreLang.append(
+                $("<option>")
+                .attr("value", lang.name)
+                .text(lang.name)
+        )
+    }
+
 
     function remplirTab(currentPage) {
         tbody.empty();
@@ -14,7 +75,7 @@ $(document).ready(function() {
         let end = start + 25;
 
         // let countries_filtre = Country.all_countries;
-        let countries_filtre = listePaysFiltre();
+        countries_filtre = listePaysFiltre();
         
         let page = Object.entries(countries_filtre).slice(start, end);
 
@@ -24,23 +85,27 @@ $(document).ready(function() {
 
             let nomP = country.names["fr"];
             if (nomP == null) {
-                nomP = "/";
+                nomP = "N/A";
             }
             let popP = country.population;
             if (popP == null) {
-                popP = "/";
+                popP = "N/A";
             }
             let supP = country.superficie;
             if (supP == null) {
-                supP = "/";
+                supP = "N/A";
             }
             let densP = country.getPopDensity();
             if (densP == null) {
-                densP = "/";
+                densP = "N/A";
+            }
+            else
+            {
+                densP = densP.toFixed(2)
             }
             let cont = country.continent;
             if (cont == null) {
-                cont = "/";
+                cont = "N/A";
             }
             
             //Puis on ajoute le pays au tableau
@@ -98,28 +163,74 @@ $(document).ready(function() {
             }
         }
 
+        if (filtreCont.val() != "") {
+            if (pays.continent != filtreCont.val()) {
+                match = false;
+            }
+        }
+        
+        if (filtreLang.val() != "") {
+            let it = 0;
+            let matchLocal = false;
+            while ((matchLocal == false) && (it < pays.languages.length)) {
+                if (Language.all_languages[pays.languages[it]].name == filtreLang.val()) {
+                    matchLocal = true;
+                }
+                it++;
+            }
+            if ((matchLocal == false) && (match == true)) {
+                match = false;
+            }
+        }
+
         return match;
     }
 
     filtreNom.on("input", function() {
-        remplirTab(pageActu);
+        document.cookie = "pageActu=1;expires=31 Dec 2026 23:59:59 GMT;path=/;SameSite=Lax";
+        remplirTab(getCookie("pageActu"));
     });
 
+    filtreCont.on("change", function () {
+        document.cookie = "pageActu=1;expires=31 Dec 2026 23:59:59 GMT;path=/;SameSite=Lax";
+        remplirTab(getCookie("pageActu"));
+    });
+
+    filtreLang.on("change", function () {
+        document.cookie = "pageActu=1;expires=31 Dec 2026 23:59:59 GMT;path=/;SameSite=Lax";
+        remplirTab(getCookie("pageActu"));
+    });
+
+
     $("#prec").click(function() {
+        let pageActu = getCookie("pageActu");
         if (pageActu > 1) {
             pageActu--;
-            remplirTab(pageActu);
+            document.cookie = "pageActu=" + pageActu + ";expires=Fri, 31 Dec 2026 23:59:59 GMT;path=/";
+            remplirTab(getCookie("pageActu"));
         }
     });
 
     $("#suiv").click(function() {
-        if (pageActu < Math.ceil(Object.values(Country.all_countries).length / 25)) {
+        let pageActu = getCookie("pageActu");
+        if (pageActu < Math.ceil(Object.values(countries_filtre).length / 25)) {
             pageActu++;
-            remplirTab(pageActu);
+            document.cookie = "pageActu=" + pageActu + ";expires=Fri,31Dec202623:59:59GMT;path=/";
+            remplirTab(getCookie("pageActu"));
         }
     });
+
+    $("#prem").click(function() {
+        document.cookie = "pageActu=1;expires=Fri, 31 Dec 2026 23:59:59 GMT;path=/";
+        remplirTab(1);
+    });
     
-    remplirTab(pageActu);
+    $("#dern").click(function() {
+        document.cookie = "pageActu=" + Math.ceil(Object.values(countries_filtre).length / 25) + ";expires=Fri, 31 Dec 2026 23:59:59 GMT;path=/";
+        remplirTab(Math.ceil(Object.values(countries_filtre).length / 25));
+    });
+
+    remplirTab(getCookie("pageActu"));
 
 
 
@@ -303,7 +414,6 @@ $(document).ready(function() {
             )
         )
 
-
         overlay.prepend(liste)
 
         overlay[0].style.display = "flex"
@@ -322,41 +432,54 @@ $(document).ready(function() {
 
     }
 
-    /* ----------- V5 ----------- */
 
-    $("th[id]").on("click", (event) => {
-        let id = event.target.id
-        console.log(id)
-    })
+        /* ----------- V5 ----------- */
 
-    function sortCountries(attribut)
-    {
-        if(["name", "population", "superficie", "density", "continent"].includes(attribut))
-        {
-            console.log("entries")
-            Country.all_countries = Object.fromEntries(Object.entries(Country.all_countries).sort(([, c1], [, c2]) => Country.compare(c1, c2, attribut)))
-            console.log(Country.all_countries)
-        }
-        else
-        {
-            console.log("attribut de tri incorrect")
-        }
-    }
+        $("th[id]:not(#drapeau)").on("click", (event) => {
+            let attribut = event.currentTarget.id
 
-
-    sortCountries("population")
-
-
-    /* -------------------- raccourcis clavier -------------------- */
-
-    document.addEventListener("keydown", (event) => {
-        if(event.key === "Escape")
-        {
-            if(overlay[0].style.display = "flex")
+            if($("#" + attribut + " .chevron").text() == "🔽")
             {
-                overlay[0].style.display = "none"
-                overlay.children(":not(button)").remove()
+                $("#" + attribut + " .chevron").text("🔼")
+                Country.all_countries = Object.fromEntries(Object.entries(Country.all_countries).reverse())
+            }
+            else
+            {
+                $("#" + attribut + " .chevron").text("🔽")
+                sortCountries(attribut)
+            }
+
+            $("th[id]").removeClass("trie")
+            event.currentTarget.classList.add("trie")
+
+
+            remplirTab(getCookie("pageActu"))
+        })
+    
+        function sortCountries(attribut)
+        {
+            if(["name", "population", "superficie", "density", "continent"].includes(attribut))
+            {
+                Country.all_countries = Object.fromEntries(Object.entries(Country.all_countries).sort(([, c1], [, c2]) => Country.compare(c1, c2, attribut)))
+            }
+            else
+            {
+                console.log("attribut de tri incorrect")
             }
         }
-    })
+
+        /* -------------------- raccourcis clavier -------------------- */
+
+        document.addEventListener("keydown", (event) => {
+            if(event.key === "Escape")
+            {
+                if(overlay[0].style.display = "flex")
+                {
+                    overlay[0].style.display = "none"
+                    overlay.children(":not(button)").remove()
+                }
+            }
+           
+        })
 });
+

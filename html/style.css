@@ -2,19 +2,28 @@
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+body{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
 table {
-    width: 100%;
+    width: 90%;
     border-collapse: collapse;
+    margin: 10px;
 }
 
 th, td {
     padding: 8px;
     border: 1px solid #ccc;
     text-align: left;
+    cursor: pointer;
 }
 
 th {
     background-color: #f2f2f2;
+    justify-content: space-around;
 }
 
 tr:nth-child(even) {
@@ -27,6 +36,7 @@ td img {
 }
 
 .divBtn {
+    width: 70%;
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -55,6 +65,7 @@ tr:hover{
 button {
     height: 40px;
     width: 120px;
+    cursor: pointer;
 }
 
 #overlay #listeDetail{
@@ -63,6 +74,7 @@ button {
     background-color: white;
     padding: 15px;
     border-radius: 10px;
+    max-width: 95%;
 }
 
 #overlay #listeDetail > li{
@@ -73,6 +85,7 @@ button {
 #overlay img{
     border-radius: 15px;
     margin: 15px;
+    max-height: 700px;
 }
 
 #listeDetail img{
@@ -80,6 +93,7 @@ button {
 }
 
 #menuFiltre {
+    width: 90%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -108,4 +122,26 @@ button {
     border-radius: 5px;
     font-size: 14px;
     background-color: white;
+}
+
+#menuFiltre select{
+    cursor: pointer;
+}
+
+.trie{
+    background-color: bisque;
+}
+
+.chevron{
+    display: none;
+    font-weight: 200;
+}
+
+.trie .chevron{
+    display: inline;
+}
+
+
+#drapeau{
+    cursor: default;
 }

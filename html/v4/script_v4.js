@@ -99,6 +99,10 @@ $(document).ready(function() {
             if (densP == null) {
                 densP = "N/A";
             }
+            else
+            {
+                densP = densP.toFixed(2)
+            }
             let cont = country.continent;
             if (cont == null) {
                 cont = "N/A";
@@ -213,6 +217,16 @@ $(document).ready(function() {
             document.cookie = "pageActu=" + pageActu + ";expires=Fri,31Dec202623:59:59GMT;path=/";
             remplirTab(getCookie("pageActu"));
         }
+    });
+
+    $("#prem").click(function() {
+        document.cookie = "pageActu=1;expires=Fri, 31 Dec 2026 23:59:59 GMT;path=/";
+        remplirTab(1);
+    });
+    
+    $("#dern").click(function() {
+        document.cookie = "pageActu=" + Math.ceil(Object.values(countries_filtre).length / 25) + ";expires=Fri, 31 Dec 2026 23:59:59 GMT;path=/";
+        remplirTab(Math.ceil(Object.values(countries_filtre).length / 25));
     });
     
     remplirTab(getCookie("pageActu"));

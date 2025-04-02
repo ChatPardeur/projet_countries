@@ -8,27 +8,38 @@
 
 </head>
 <body>
-    <section id="menuFiltre">
-        <div>
-            <label for="searchNom">Nom du pays (fr / en) :</label>
-            <input id="searchNom" name="searchNom" type="text">
-        </div>
-        <div>
-          
-        </div>
-    </section>
+  <section id="menuFiltre">
+    <div>
+        <label for="searchNom">Nom du pays (fr / en) :</label>
+        <input id="searchNom" name="searchNom" type="text">
+    </div>
+    <div>
+        <label for="cont-select">Choisissez un continent :</label>
+
+        <select name="contient" id="cont-select">
+          <option value="">--Sélectionnez un continent--</option>
+        </select>
+    </div>
+    <div>
+      <label for="lang-select">Choisissez une langue :</label>
+
+      <select name="langue" id="lang-select">
+        <option value="">--Sélectionnez une langue--</option>
+      </select>
+  </div>
+</section>
     <div id="overlay">
       <button>fermer (échap)</button>
   </div>
     <table id="tableauCountries">
         <thead>
             <tr>
-              <th scope="col" id="name">Nom en français</th>
-              <th scope="col" id="population">Population</th>
-              <th scope="col" id="superficie">Surface</th>
-              <th scope="col" id="density">Densité de population</th>
-              <th scope="col" id="continent">Continent d’appartenance</th>
-              <th scope="col">Drapeau</th>
+              <th scope="col" id="name" class="trie">Nom en français <span class="chevron">🔼</span></th>
+              <th scope="col" id="population"><span class="chevron">🔼</span> Population</th>
+              <th scope="col" id="superficie"><span class="chevron">🔼</span> Surface</th>
+              <th scope="col" id="density"><span class="chevron">🔼</span> Densité de population</th>
+              <th scope="col" id="continent"><span class="chevron">🔼</span> Continent d’appartenance</th>
+              <th scope="col" id="drapeau">Drapeau</th>
             </tr>
           </thead>
           <tbody>
@@ -37,9 +48,11 @@
     </table>
 
     <div class="divBtn">
+      <button id="prem">Premier</button>
       <button id="prec">Précédent</button>
       <p id="numPage"></p>
       <button id="suiv">Suivant</button>
+      <button id="dern">Dernier</button>
     </div>
 
 </body>
